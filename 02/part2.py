@@ -12,10 +12,6 @@ def is_descending_report(report: list[int]) -> bool:
 
 
 def is_valid_report(report: list[int]) -> bool:
-    is_ascending = is_ascending_report(report)
-    is_descending = is_descending_report(report)
-    if is_ascending or is_descending:
-        return True
     is_ascending_with_one_fixable_mistake = any(
         is_ascending_report(report[:i] + report[i + 1 :]) for i in range(len(report))
     )
