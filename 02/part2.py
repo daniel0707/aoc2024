@@ -1,25 +1,24 @@
+from itertools import pairwise
+
+
 def parse_input(path: str) -> list[str]:
     with open(path, "r") as input:
         return input.read().splitlines()
 
 
 def is_ascending_report(report: list[int]) -> bool:
-    return all(1 <= (report[i + 1] - report[i]) <= 3 for i in range(len(report) - 1))
+    return all(1 <= (b - a) <= 3 for a, b in pairwise(report))
 
 
 def is_descending_report(report: list[int]) -> bool:
-    return all(1 <= (report[i] - report[i + 1]) <= 3 for i in range(len(report) - 1))
+    return all(1 <= (a - b) <= 3 for a, b in pairwise(report))
 
 
 def is_valid_report(report: list[int]) -> bool:
-    is_ascending_with_one_fixable_mistake = any(
-        is_ascending_report(report[:i] + report[i + 1 :]) for i in range(len(report))
-    )
-    is_descending_with_one_fixable_mistake = any(
-        is_descending_report(report[:i] + report[i + 1 :]) for i in range(len(report))
-    )
-    return (
-        is_ascending_with_one_fixable_mistake or is_descending_with_one_fixable_mistake
+    return any(
+        is_ascending_report(report[:i] + report[i + 1 :])
+        or is_descending_report(report[:i] + report[i + 1 :])
+        for i in range(len(report))
     )
 
 
