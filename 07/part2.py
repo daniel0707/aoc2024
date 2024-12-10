@@ -14,7 +14,6 @@ def solve(input: list[tuple[int, list[int]]]) -> int:
         correct = dfs(target, current, numbers[1:])
         if correct:
             total += target
-    print(total)
     return total
 
 

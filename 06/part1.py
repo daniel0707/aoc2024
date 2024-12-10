@@ -20,7 +20,6 @@ def solve(input: list[list[str]]) -> int:
                 position = next_position
         except IndexError:
             break
-    print(visited)
     return len(visited)
 
 
